@@ -1,30 +1,35 @@
 # سامانه اتوماسیون اداری و اعضا (UI + PHP API)
 
-## اجرای سریع
+## اجرای یکپارچه روی یک هاست
 
-- UI استاتیک:
-  - مسیر `ui/index.html` را روی هر وب‌سروری سرو کنید یا مستقیماً در مرورگر باز کنید.
-  - آدرس API را در `index.html` با مقدار `window.UI_CONFIG.apiBaseUrl` تنظیم کنید (پیش‌فرض: `/api`).
+- اجرا:
+  ```bash
+  cd api
+  php -S 0.0.0.0:8080 -t public
+  ```
+- دسترسی:
+  - UI: `http://localhost:8080/app/index.html`
+  - API: مسیر پایه `/api`
+- UI از قبل به `apiBaseUrl: '/api'` تنظیم شده است.
 
-- API PHP (بدون فریم‌ورک):
-  - پیش‌نیاز: PHP 8+
-  - اجرا:
-    ```bash
-    cd api
-    php -S 0.0.0.0:8080 -t public
-    ```
-  - اندپوینت‌ها:
-    - GET `/auth/me`
-    - POST `/auth/login`  (دمو: admin/admin یا user/user)
-    - POST `/auth/logout`
-    - GET `/members`, GET `/members/{id}`
-    - GET `/letters?box=inbox|sent|drafts`, GET `/letters/{id}`
-    - POST `/letters` (type=draft)
-    - GET `/users`
-    - GET `/roles`
-    - POST `/users/{id}/role`
-    - GET `/org-structure`
+## اجرای جدا (اختیاری)
+- UI (استاتیک):
+  ```bash
+  cd ui
+  python3 -m http.server 5500
+  ```
+  سپس در `ui/index.html` مقدار `apiBaseUrl` را روی `http://localhost:8080/api` بگذارید.
 
-## نکات
-- ذخیره‌سازی فایل‌محور در `api/storage` با داده‌های نمونه Seed شده.
-- اگر UI و API روی پورت/دومین متفاوت اجرا می‌شوند، `apiBaseUrl` را مثل `http://localhost:8080` ست کنید.
+- API (PHP): مطابق بخش بالا.
+
+## اندپوینت‌ها
+- GET `/api/auth/me`
+- POST `/api/auth/login`  (دمو: admin/admin یا user/user)
+- POST `/api/auth/logout`
+- GET `/api/members`, GET `/api/members/{id}`
+- GET `/api/letters?box=inbox|sent|drafts`, GET `/api/letters/{id}`
+- POST `/api/letters` (type=draft)
+- GET `/api/users`
+- GET `/api/roles`
+- POST `/api/users/{id}/role`
+- GET `/api/org-structure`

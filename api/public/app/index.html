@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>سامانه اتوماسیون اداری و اعضا</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <script>
+      window.UI_CONFIG = {
+        apiBaseUrl: '/api'
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <aside id="sidebar" class="sidebar"></aside>
+      <main class="main">
+        <header id="header" class="header"></header>
+        <section id="content" class="content" aria-live="polite"></section>
+      </main>
+    </div>
+
+    <noscript>
+      برای استفاده از این سامانه نیاز است جاوااسکریپت فعال باشد.
+    </noscript>
+
+    <script type="module" src="./assets/js/app.js"></script>
+  </body>
+</html>

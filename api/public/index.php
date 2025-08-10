@@ -3,7 +3,13 @@
 // Run with: php -S 0.0.0.0:8080 -t public
 
 header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+  header('Access-Control-Allow-Origin: ' . $origin);
+  header('Vary: Origin');
+} else {
+  header('Access-Control-Allow-Origin: *');
+}
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Headers: Content-Type, Accept');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
@@ -51,6 +57,13 @@ function current_user() {
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $method = $_SERVER['REQUEST_METHOD'];
+
+// Mount under /api base path
+$BASE_PREFIX = '/api';
+if (str_starts_with($path, $BASE_PREFIX)) {
+  $path = substr($path, strlen($BASE_PREFIX));
+  if ($path === '') $path = '/';
+}
 
 // Seed data if not exists
 $seedFiles = [
