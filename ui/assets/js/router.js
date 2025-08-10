@@ -23,17 +23,27 @@ function matchRoute(routes, currentPath) {
     }
     if (matched) return { route, params };
   }
-  // fallback to root
   const root = routes.find(r => r.path === '/');
   return { route: root, params: {} };
 }
 
-export function initRouter({ routes, outlet, onRoute }) {
+export function initRouter({ routes, outlet, onRoute, beforeRoute }) {
   async function render() {
     const path = parseLocation();
     const { route, params } = matchRoute(routes, path);
-    if (typeof onRoute === 'function') onRoute(route.path);
+
     if (!route) return;
+
+    if (typeof beforeRoute === 'function') {
+      const redirect = await beforeRoute(route.path, { route, params });
+      if (typeof redirect === 'string' && redirect && redirect !== path) {
+        window.location.hash = `#${redirect}`;
+        return;
+      }
+    }
+
+    if (typeof onRoute === 'function') onRoute(route.path);
+
     outlet.innerHTML = '';
     try {
       const component = route.component;

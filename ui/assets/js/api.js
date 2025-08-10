@@ -31,10 +31,25 @@ async function apiPost(path, body) {
 }
 
 export const API = {
+  // members
   getMembers: (params) => apiGet('/members', params),
   getMemberById: (id) => apiGet(`/members/${encodeURIComponent(id)}`),
+
+  // letters
   getLetters: (box, params) => apiGet('/letters', { box, ...(params || {}) }),
-  getUsers: (params) => apiGet('/users', params),
-  getOrgStructure: () => apiGet('/org-structure'),
+  getLetterById: (id) => apiGet(`/letters/${encodeURIComponent(id)}`),
   createDraft: (payload) => apiPost('/letters', { type: 'draft', ...payload }),
+
+  // users and roles
+  getUsers: (params) => apiGet('/users', params),
+  getRoles: () => apiGet('/roles'),
+  updateUserRole: (userId, role) => apiPost(`/users/${encodeURIComponent(userId)}/role`, { role }),
+
+  // org
+  getOrgStructure: () => apiGet('/org-structure'),
+
+  // auth
+  me: () => apiGet('/auth/me'),
+  login: (username, password) => apiPost('/auth/login', { username, password }),
+  logout: () => apiPost('/auth/logout', {}),
 };

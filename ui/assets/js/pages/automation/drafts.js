@@ -4,7 +4,7 @@ function row(letter) {
   const d = letter.updatedAt ? new Intl.DateTimeFormat('fa-IR', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(letter.updatedAt)) : '—';
   return `<tr>
     <td>${letter.id ?? '—'}</td>
-    <td>${letter.subject ?? '—'}</td>
+    <td><a href="#/automation/letters/${encodeURIComponent(letter.id)}">${letter.subject ?? '—'}</a></td>
     <td>${d}</td>
     <td><span class="badge">پیش‌نویس</span></td>
   </tr>`;
