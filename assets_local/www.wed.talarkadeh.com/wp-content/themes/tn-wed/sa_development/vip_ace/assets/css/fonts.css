@@ -1,0 +1,32 @@
+@font-face {
+    font-family: shabnam;
+    font-style: normal;
+    font-weight: 500;
+    src: url("./../fonts/Shabnam-FD.eot");
+    src: url("./../fonts/Shabnam-FD.eot?#iefix") format("embedded-opentype"),
+        url("./../fonts/Shabnam-FD.woff2") format("woff2"),
+        url("./../fonts/Shabnam-FD.woff") format("woff"),
+        url("./../fonts/Shabnam-FD.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: nastaliq;
+    font-style: normal;
+    font-weight: 500;
+    src: url("./../fonts/IranNastaliq.eot");
+    src: url("./../fonts/IranNastaliq.eot?#iefix") format("embedded-opentype"),
+        url("./../fonts/IranNastaliq.woff2") format("woff2"),
+        url("./../fonts/IranNastaliq.woff") format("woff"),
+        url("./../fonts/IranNastaliq.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: shekasteh;
+    font-style: normal;
+    font-weight: 500;
+    src: url("./../fonts/Shekasteh1.eot");
+    src: url("./../fonts/Shekasteh1.eot?#iefix") format("embedded-opentype"),
+        url("./../fonts/Shekasteh1.woff2") format("woff2"),
+        url("./../fonts/Shekasteh1.woff") format("woff"),
+        url("./../fonts/Shekasteh1.ttf") format("truetype");
+}
