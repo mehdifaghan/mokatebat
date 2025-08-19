@@ -1,0 +1,7 @@
+Options -Indexes
+AddDefaultCharset UTF-8
+DirectoryIndex index.html
+
+# Optional: set email for RSVP notifications (uncomment and edit)
+# SetEnv MAIL_TO you@example.com
+
