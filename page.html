@@ -668,9 +668,40 @@ var apiJs = {"url":"https:\/\/www.wed.talarkadeh.com\/wp-admin\/admin-ajax.php",
 /* ]]> */
 </script>
 <script type="text/javascript" src="https://www.wed.talarkadeh.com/wp-content/themes/tn-wed/sa_development/vip_ace/assets/js/app.js?ver=1.2.1" id="appJs-js"></script>
-</div>
-</main>
-</div>
-</body>
+ </div>
+ </main>
+ </div>
+ <!-- Local adapter to wire RSVP UI on this static page to server-side handler -->
+ <form id="rsvp-proxy" method="post" action="wedding-site/rsvp.php" style="display:none">
+   <input type="hidden" name="full_name">
+   <input type="hidden" name="phone">
+   <input type="hidden" name="guests" value="1">
+   <input type="hidden" name="status">
+   <input type="hidden" name="message">
+ </form>
+ <script>
+ (function(){
+   function $(s){return document.querySelector(s);}    
+   document.addEventListener('click',function(e){
+     var btn=e.target.closest('.send-comment__btn'); if(!btn) return;
+     e.preventDefault();
+     var nameEl=$('#name'); var mobileEl=$('#mobile');
+     var messageEl=document.querySelector('textarea[name="message"]');
+     var willEl=document.querySelector('input[name="will_come"]:checked');
+     var fullName=nameEl?nameEl.value.trim():'';
+     var phone=mobileEl?mobileEl.value.trim():'';
+     var message=messageEl?messageEl.value.trim():'';
+     var status=(willEl && willEl.value==='yes')?'حضور دارم':'متأسفانه نمی‌توانم بیایم';
+     if(!fullName || !message){ try{alert('لطفاً نام و پیام را وارد کنید.');}catch(_){} return; }
+     var form=document.getElementById('rsvp-proxy');
+     form.elements['full_name'].value=fullName;
+     form.elements['phone'].value=phone;
+     form.elements['status'].value=status;
+     form.elements['message'].value=message;
+     form.submit();
+   });
+ })();
+ </script>
+ </body>
 
 </html>
